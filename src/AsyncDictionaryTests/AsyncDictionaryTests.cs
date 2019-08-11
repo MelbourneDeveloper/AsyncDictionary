@@ -1,6 +1,7 @@
 using CF.Collections.Generic;
 using NUnit.Framework;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -120,7 +121,7 @@ namespace Tests
         [Test]
         public async Task TestThreadSafety()
         {
-            var asyncDictionary = new AsyncDictionary<int, string>();
+            var asyncDictionary = new AsyncDictionary<int, string>(new ConcurrentDictionary<int, string>());
 
             var tasks = new List<Task> { AddKeyValuePairsAsync(asyncDictionary), asyncDictionary.ClearAsync(), AddKeyValuePairsAsync(asyncDictionary) };
 

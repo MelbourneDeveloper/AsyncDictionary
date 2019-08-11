@@ -82,7 +82,7 @@ namespace CF.Collections.Generic
         #endregion
 
         #region Constructor
-        public AsyncDictionary()
+        public AsyncDictionary() : this(new Dictionary<TKey, TValue>())
         {
             //Note: the constructor overload to allow passing in a different Dictionary type has been removed to disallow unsynchronized access. It can be added if you're careful.
             _dictionary = new Dictionary<TKey, TValue>();
@@ -91,10 +91,10 @@ namespace CF.Collections.Generic
         /// <summary>
         /// This overload is used in cases where a standard Dictionary isn't the right choice. Warning: accessing the Dictionary outside this class will break synchronization
         /// </summary>
-        //public AsyncDictionary(IDictionary<TKey, TValue> dictionary)
-        //{
-        //    _dictionary = dictionary;
-        //}
+        public AsyncDictionary(IDictionary<TKey, TValue> dictionary)
+        {
+            _dictionary = dictionary;
+        }
         #endregion
 
         #region Implementation
