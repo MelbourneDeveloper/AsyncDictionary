@@ -16,6 +16,22 @@ namespace Tests
 
         #region Tests
         [Test]
+        public async Task TestAddAndRetrieveKeys2()
+        {
+            var numbers = new AsyncDictionary<int, int>();
+
+            foreach (var number in Enumerable.Range(1, 1000))
+            {
+                await numbers.AddAsync(number, number);
+            }
+
+            foreach (var number in await numbers.GetKeysAsync())
+            {
+                await numbers.RemoveAsync(number);
+            }
+        }
+
+        [Test]
         public async Task TestAddAndRetrieveKeys()
         {
             var asyncDictionary = new AsyncDictionary<int, string>();

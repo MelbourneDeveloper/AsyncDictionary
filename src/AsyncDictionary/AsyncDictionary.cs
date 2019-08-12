@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,12 +33,12 @@ namespace CF.Collections.Generic
 
         private static readonly Func<IDictionary<TKey, TValue>, KeyValuePair<TKey, TValue>, Task<ICollection<TValue>>> GetValuesFunc = new Func<IDictionary<TKey, TValue>, KeyValuePair<TKey, TValue>, Task<ICollection<TValue>>>((dictionary, keyValuePair) =>
        {
-           return Task.FromResult(dictionary.Values);
+           return Task.FromResult<ICollection<TValue>>(dictionary.Values.ToList());
        });
 
         private static readonly Func<IDictionary<TKey, TValue>, KeyValuePair<TKey, TValue>, Task<ICollection<TKey>>> GetKeysFunc = new Func<IDictionary<TKey, TValue>, KeyValuePair<TKey, TValue>, Task<ICollection<TKey>>>((dictionary, keyValuePair) =>
        {
-           return Task.FromResult(dictionary.Keys);
+           return Task.FromResult<ICollection<TKey>>(dictionary.Keys.ToList());
        });
 
         private static readonly Func<IDictionary<TKey, TValue>, KeyValuePair<TKey, TValue>, Task<bool>> AddFunc = new Func<IDictionary<TKey, TValue>, KeyValuePair<TKey, TValue>, Task<bool>>((dictionary, keyValuePair) =>
